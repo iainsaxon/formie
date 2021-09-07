@@ -953,6 +953,11 @@ class Form extends Element
      */
     public function getRelationsFromRequest()
     {
+        // nothing to do here for console requests
+        if (Craft::$app->getRequest()->getIsConsoleRequest()) {
+            return null;
+        }
+
         $value = (string)Craft::$app->getRequest()->getBodyParam('relations', '');
 
         return Json::decode(StringHelper::decdec($value));
